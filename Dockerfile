@@ -71,4 +71,6 @@ RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master
 RUN service php7.3-fpm start; \
     service nginx start
 
-CMD tail -f /log/fpm.log
+RUN touch /log/docker.log
+
+CMD tail -f /log/docker.log
