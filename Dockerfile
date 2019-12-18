@@ -68,7 +68,7 @@ COPY config/nginx/default.conf /etc/nginx/sites-available/default
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 # Start services
-RUN service php7.3-fpm restart; \
-    service nginx restart
+RUN service php7.3-fpm start; \
+    service nginx start
 
 CMD tail -f /log/fpm.log
