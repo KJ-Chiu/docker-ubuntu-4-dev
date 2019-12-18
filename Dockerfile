@@ -55,6 +55,7 @@ RUN apt-get install nginx nginx-extras -y --allow-unauthenticated
 
 # Node install
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.1/install.sh | bash; \
+    . /root/.nvm/nvm.sh; \
     nvm install v12.13.1; \
     nvm use v12.13.1
 
