@@ -43,9 +43,6 @@ RUN apt-get install apt-transport-https lsb-release ca-certificates -y; \
     apt-get install php7.3 php7.3-common php7.3-cli php7.3-fpm php7.3-mbstring php7.3-mysqli php7.3-xml php7.3-zip -y --allow-unauthenticated; \
     mkdir /log
 
-COPY config/php/ /etc/php/7.3
-COPY config/sample/info.php /home/developer/nginx-site/
-
 # Composer install
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"; \
     php -r "if (hash_file('sha384', 'composer-setup.php') === 'baf1608c33254d00611ac1705c1d9958c817a1a33bce370c0595974b342601bd80b92a3f46067da89e3b06bff421f182') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"; \
@@ -60,6 +57,14 @@ RUN apt-get install nginx nginx-extras -y --allow-unauthenticated
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.1/install.sh | bash; \
     nvm install v12.13.1; \
     nvm use v12.13.1
+
+# Outside file setting
+COPY config/php/ /etc/php/7.3/fpm
+COPY config/sample/info.php /home/developer/nginx-site/
+COPY config/nginx/default.conf /etc/nginx/sites-available/default
+
+# Plugin install
+RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 # Start services
 RUN service php7.3-fpm restart; \
