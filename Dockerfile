@@ -54,9 +54,7 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"; \
     mv composer.phar /bin/composer
 
 # Nginx install
-RUN apt-get install nginx nginx-extras -y
-
-COPY config/nginx /etc/nginx/conf.d
+RUN apt-get install nginx nginx-extras -y --allow-unauthenticated
 
 # Node install
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.1/install.sh | bash; \
