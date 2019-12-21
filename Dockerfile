@@ -103,7 +103,7 @@ USER root
 RUN mkdir /run/php \
     && chmod 777 /run/php
 
-EXPOSE 80
+EXPOSE 80 8080
 
 WORKDIR /home/$DEVELOPER
 
