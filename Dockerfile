@@ -33,16 +33,17 @@ RUN wget https://dl.google.com/go/go1.13.5.linux-amd64.tar.gz \
     && echo "\n export PATH=$PATH:/usr/local/go/bin" >> /etc/profile
 
 # PHP install
-RUN apt-get install apt-transport-https lsb-release ca-certificates -y \
-    && wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg \
-    && sh -c 'echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list' \
-    && apt-get install software-properties-common -y \
-    && apt-get update -y \
-    && add-apt-repository ppa:ondrej/php -y \
-    && apt-get update -y \
-    && apt-get install zip unzip -y \
-    && apt-get install php7.3 php7.3-common php7.3-cli php7.3-fpm php7.3-mbstring php7.3-mysqli php7.3-xml php7.3-zip -y --allow-unauthenticated \
-    && mkdir /log
+RUN apt-get install apt-transport-https lsb-release ca-certificates -y; \
+    apt-get update; \
+    wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg; \
+    sh -c 'echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list'; \
+    apt-get install software-properties-common -y; \
+    apt-get update -y; \
+    add-apt-repository ppa:ondrej/php -y; \
+    apt-get update -y; \
+    apt-get install zip unzip -y; \
+    apt-get install php7.3 php7.3-common php7.3-cli php7.3-fpm php7.3-mbstring php7.3-mysqli php7.3-xml php7.3-zip -y --allow-unauthenticated; \
+    mkdir /log
 
 # Composer install
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
