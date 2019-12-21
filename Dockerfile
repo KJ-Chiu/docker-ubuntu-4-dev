@@ -78,8 +78,9 @@ ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 
 # Outside file setting
 COPY config/php/ /etc/php/7.3/fpm
-COPY config/sample/info.php /home/$DEVELOPER/nginx-site/
 COPY config/nginx/default.conf /etc/nginx/sites-available/default
+COPY config/sample/info.php /home/$DEVELOPER/nginx-site/
+RUN chown -R $DEVELOPER:$DEVELOPER /home/$DEVELOPER/nginx-site/
 
 # User doing
 USER $DEVELOPER
@@ -99,12 +100,11 @@ RUN cd ~/ \
 # root come back
 USER root
 
-# Start services
-RUN service php7.3-fpm start \
-    && service nginx start
+RUN mkdir /run/php \
+    && chmod 777 /run/php
 
-RUN touch /log/docker.log
+EXPOSE 80
 
 WORKDIR /home/$DEVELOPER
 
-CMD tail -f /log/docker.log
+CMD service php7.3-fpm restart && nginx -g "daemon off;"
