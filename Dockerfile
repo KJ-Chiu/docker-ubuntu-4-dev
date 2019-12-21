@@ -84,4 +84,6 @@ RUN service php7.3-fpm start; \
 
 RUN touch /log/docker.log
 
+WORKDIR /home/developer
+
 CMD tail -f /log/docker.log
