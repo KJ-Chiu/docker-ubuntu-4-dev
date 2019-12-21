@@ -64,8 +64,19 @@ COPY config/php/ /etc/php/7.3/fpm
 COPY config/sample/info.php /home/developer/nginx-site/
 COPY config/nginx/default.conf /etc/nginx/sites-available/default
 
+# User doing
+USER developer
+
 # Plugin install
-RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+RUN cd ~/; \
+    git clone https://github.com/KJ-Chiu/shell-config.git; \
+    cd shell-config; \
+    sh setup.sh; \
+    cd ~/; \
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+# root come back
+USER root
 
 # Start services
 RUN service php7.3-fpm start; \
