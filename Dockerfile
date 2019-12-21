@@ -53,11 +53,26 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"; \
 # Nginx install
 RUN apt-get install nginx nginx-extras -y --allow-unauthenticated
 
-# Node install
-RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.1/install.sh | bash; \
-    . /root/.nvm/nvm.sh; \
-    nvm install v12.13.1; \
-    nvm use v12.13.1
+# NVM environment variables
+ENV NVM_DIR /usr/local/nvm
+ENV NODE_VERSION 12.13.1
+
+# NVM install
+RUN mkdir $NVM_DIR \
+    && curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.1/install.sh | bash
+
+# Node NPM install
+RUN . $NVM_DIR/nvm.sh \
+    && nvm install $NODE_VERSION \
+    && nvm alias default $NODE_VERSION \
+    && nvm use default
+
+# Give permission back
+RUN chown -R developer:developer $NVM_DIR
+
+# Add Node and NPM path
+ENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules
+ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 
 # Outside file setting
 COPY config/php/ /etc/php/7.3/fpm
