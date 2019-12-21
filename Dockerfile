@@ -9,7 +9,8 @@ RUN apt-get install -y ntpdate ntp \
     && ntpdate time.stdtime.gov.tw
 
 # Add User developer
-RUN useradd -ms /bin/bash  developer
+ENV DEVELOPER developer
+RUN useradd -ms /bin/bash $DEVELOPER
 
 # Editor
 RUN apt-get install vim -y
@@ -27,8 +28,8 @@ RUN apt-get install git -y
 RUN wget https://dl.google.com/go/go1.13.5.linux-amd64.tar.gz \
     && tar -C /usr/local -xzf go1.13.5.linux-amd64.tar.gz \
     && rm go1.13.5.linux-amd64.tar.gz \
-    && mkdir /home/developer/go \
-    && mkdir /home/developer/go/src \
+    && mkdir /home/$DEVELOPER/go \
+    && mkdir /home/$DEVELOPER/go/src \
     && echo "\n export PATH=$PATH:/usr/local/go/bin" >> /etc/profile
 
 # PHP install
@@ -68,7 +69,7 @@ RUN . $NVM_DIR/nvm.sh \
     && nvm use default
 
 # Give permission back
-RUN chown -R developer:developer $NVM_DIR
+RUN chown -R $DEVELOPER:$DEVELOPER $NVM_DIR
 
 # Add Node and NPM path
 ENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules
@@ -76,11 +77,11 @@ ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 
 # Outside file setting
 COPY config/php/ /etc/php/7.3/fpm
-COPY config/sample/info.php /home/developer/nginx-site/
+COPY config/sample/info.php /home/$DEVELOPER/nginx-site/
 COPY config/nginx/default.conf /etc/nginx/sites-available/default
 
 # User doing
-USER developer
+USER $DEVELOPER
 
 # Plugin install
 RUN cd ~/ \
@@ -103,6 +104,6 @@ RUN service php7.3-fpm start \
 
 RUN touch /log/docker.log
 
-WORKDIR /home/developer
+WORKDIR /home/$DEVELOPER
 
 CMD tail -f /log/docker.log
