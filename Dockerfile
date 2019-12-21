@@ -88,7 +88,11 @@ RUN cd ~/; \
     cd shell-config; \
     sh setup.sh; \
     cd ~/; \
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" \
+    && echo 'export PATH=$PATH:/usr/local/go/bin' >> ~/.zshrc \
+    && echo 'export NVM_DIR="/usr/local/nvm"' >> ~/.zshrc \
+    && echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm' >> ~/.zshrc \
+    && echo '[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion' >> ~/.zshrc
 
 # root come back
 USER root
