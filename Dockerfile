@@ -18,7 +18,7 @@ RUN apt-get install vim -y
 RUN apt-get install zsh -y
 
 # Package install
-RUN apt-get install perl liberror-perl wget curl -y
+RUN apt-get install perl liberror-perl wget curl sudo -y
 
 # Git
 RUN apt-get install git -y
