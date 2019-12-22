@@ -1,5 +1,5 @@
 # docker-ubuntu-4-dev
-> 提供快速切換電腦，確保 Window、Mac、Server 間的開發環境相同
+> A Ready-made docker image allow developers to switch between Window, Mac or any kind of server System easily.
 
 ## OS
 Ubuntu, v16.04
@@ -37,3 +37,4 @@ Ubuntu, v16.04
 ## Tips
 1. If using `npm run dev` for developing, remember to add `--host 0.0.0.0` after `webpack-dev-server` inside ur *package.json* dev script. Otherwise u might not be able to access the port outside docker cause it default listening to localhost only.
 2. Remember to volume projects into container. Any permanent change outside the volumed folder will disappear after container stopped.
+3. In WSL, volume will only success by Windows' path ex: `C:\your\path`, `/mnt/c/your/path` won't work.
