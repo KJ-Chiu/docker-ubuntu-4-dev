@@ -79,6 +79,9 @@ RUN chown -R $DEVELOPER:$DEVELOPER $NVM_DIR
 ENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules
 ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 
+# Install NPM global package
+RUN npm install -g @vue/cli@"^4.1.1"
+
 # Outside file setting
 COPY config/php/ /etc/php/7.3/fpm
 COPY config/nginx/default.conf /etc/nginx/sites-available/default
