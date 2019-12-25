@@ -27,7 +27,12 @@
 
     `./get-inside.sh`
 
-6. Normally the container will keep running in the background unless the computer restart or just trying to shut it down
+6. When developing the web service, there are **80** and **8080** port exposed. in *docker-run.sh* I assign 7777 to 80 and 8888 to 8080
+
+    * `localhost:7777`
+    * `localhost:8888`
+
+7. Normally the container will keep running in the background unless the computer restart or just trying to shut it down
 
     `./docker-stop.sh`
 
