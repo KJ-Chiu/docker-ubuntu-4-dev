@@ -15,6 +15,9 @@ RUN useradd -ms /bin/bash $DEVELOPER
 # Editor
 RUN apt-get install vim -y
 
+# Window Control
+RUN apt-get install screen tmux -y
+
 # zsh
 RUN apt-get install zsh -y
 
