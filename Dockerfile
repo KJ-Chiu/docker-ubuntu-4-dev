@@ -8,6 +8,8 @@ RUN apt-get update \
 RUN apt-get install -y ntpdate ntp \
     && ntpdate time.stdtime.gov.tw
 
+ENV LANG C.UTF-8
+
 # Add User developer
 ENV DEVELOPER developer
 RUN useradd -ms /bin/bash $DEVELOPER
