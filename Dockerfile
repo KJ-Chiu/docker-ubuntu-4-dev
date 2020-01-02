@@ -35,7 +35,8 @@ RUN wget https://dl.google.com/go/go1.13.5.linux-amd64.tar.gz \
     && rm go1.13.5.linux-amd64.tar.gz \
     && mkdir /home/$DEVELOPER/go \
     && mkdir /home/$DEVELOPER/go/src \
-    && echo "\n export PATH=$PATH:/usr/local/go/bin" >> /etc/profile
+    && echo "\n export PATH=$PATH:/usr/local/go/bin" >> /etc/profile \
+    && chown -R $DEVELOPER:$DEVELOPER /home/$DEVELOPER/go/
 
 # PHP install
 RUN apt-get install apt-transport-https lsb-release ca-certificates -y; \
