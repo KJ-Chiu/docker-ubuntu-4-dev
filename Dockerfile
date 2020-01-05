@@ -105,7 +105,8 @@ RUN cd ~/ \
     && echo 'export PATH=$PATH:/usr/local/go/bin' >> ~/.zshrc \
     && echo 'export NVM_DIR="/usr/local/nvm"' >> ~/.zshrc \
     && echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm' >> ~/.zshrc \
-    && echo '[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion' >> ~/.zshrc
+    && echo '[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion' >> ~/.zshrc \
+    && echo 'export GOPATH=$HOME/go' >> ~/.zshrc
 
 # Vundle install
 RUN git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim \
