@@ -24,7 +24,7 @@ RUN apt-get install screen tmux -y
 RUN apt-get install zsh -y
 
 # Package install
-RUN apt-get install perl liberror-perl wget curl sudo -y
+RUN apt-get install perl liberror-perl wget curl sudo build-essential -y
 
 # Git
 RUN apt-get install git -y
