@@ -84,6 +84,13 @@ ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 
 # Install NPM global package
 RUN npm install -g @vue/cli@"^4.1.1"
+RUN npm install -g create-react-app
+
+# Install yarn
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -; \
+    echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list; \
+    apt update; \
+    apt install --no-install-recommends yarn -y
 
 # Outside file setting
 COPY config/php/ /etc/php/7.3/fpm

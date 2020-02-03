@@ -57,6 +57,7 @@ Ubuntu, v16.04
 | - | - | - |
 | NVM | 0.35.1 | - |
 | NPM | latest | Control by NVM |
+| YARN | latest | |
 | composer | latest | - |
 | Nginx | latest | proxy pass php-fpm socket |
 | Git | latest | - |
@@ -65,6 +66,7 @@ Ubuntu, v16.04
 | Package | Version | Note |
 | - | - | - |
 | @vue/cli | ^4.1.1 | - |
+| create-react-app | latest | - |
 
 ### Editor Provided
 | Editor | Version | Note |
