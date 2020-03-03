@@ -122,7 +122,7 @@ USER root
 RUN mkdir /run/php \
     && chmod 777 /run/php
 
-EXPOSE 80 3000 4000 8080
+EXPOSE 80 3000 3010 4000 8080
 
 WORKDIR /home/$DEVELOPER
 
