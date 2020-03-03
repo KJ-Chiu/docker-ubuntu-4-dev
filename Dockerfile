@@ -5,9 +5,6 @@ RUN apt-get update \
     && apt-get upgrade -y
 
 # System setting
-RUN apt-get install -y ntpdate ntp \
-    && ntpdate time.stdtime.gov.tw
-
 ENV LANG C.UTF-8
 
 # Add User developer
